@@ -13,6 +13,7 @@ import librosa
 from utils import *
 import glob
 
+
 # Below is the accent info for the used 10 speakers.
 spk2acc = {'262': 'Edinburgh', #F
            '272': 'Edinburgh', #M
