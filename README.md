@@ -61,16 +61,22 @@ Due to limited resources, only 10,000 training iterations have been completed so
 https://www.kaggle.com/datasets/pratt3000/vctk-corpus
 Preprocessing
 To prepare the dataset for training, run the preprocess.py script:
-python preprocess.py 
 
+```
+python preprocess.py --sample_rate 16000 \
+                    --origin_wavpath data/VCTK-Corpus/wav48 \
+                    --target_wavpath data/VCTK-Corpus/wav16 \
+                    --mc_dir_train data/mc/train \
+                    --mc_dir_test data/mc/test
+```
 
 This will convert audio files into mel-spectrograms and organize them for training. Ensure that the dataset is structured correctly to avoid any preprocessing issues.
 Training
 To start training the model, use the following command:
 
-
-python train.py
-
+```
+python main.py
+```
 
  Adjust parameters like batch size, learning rate, and the number of epochs based on your requirements and computational resources.
 Training Notes
@@ -78,11 +84,11 @@ Due to limited resources, we are currently training the model in increments, wit
 Running the Model
 Once training is complete, you can run main.py to test the model’s voice conversion capabilities:
 
+```
+python convert.py --resume_iters <path_to_checkpoint> --src_spk p262 --trg_spk p272
+```
 
-python main.py --config config.yaml --checkpoint <path_to_checkpoint>
-
-
-Replace <path_to_checkpoint> with the path to your trained model checkpoint file. This will perform voice conversion based on the input and target speaker indices specified in the configuration.
+Replace <path_to_checkpoint> with the path to your trained model checkpoint file. This will perform voice conversion based on the input and target speaker indices specified in the configuration. For this project due to limited resources we were only able to train the model for 10000 iterations which is not enough and that's why quality is not that upto the mark.
 Results
 Results, including converted samples and logs, are saved in the samples and logs directories, respectively. You can monitor the training and conversion progress by checking these directories.
 Acknowledgments
